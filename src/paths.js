@@ -8,7 +8,7 @@ const server = express()
 //Employ Global Middleware
 server.use(express.json())
 
-//Get All Messages
+/* Get All Messages */
 server.get('/messages/all', (req, res) => {
     messages.findAll()
         .then((msgs) => {
@@ -21,6 +21,7 @@ server.get('/messages/all', (req, res) => {
         })
 })
 
+/* Get Message by ID */
 server.get('/messages/:id', async (req, res) => {
     try {
         const theMessage = await messages.findByID(req.params.id)
@@ -31,6 +32,20 @@ server.get('/messages/:id', async (req, res) => {
             error: err.message,
             message: "Yeah, that email doesn't exist."
         })
+    }
+})
+/* Post New Message */
+server.post('/messages', async (req, res) => {
+    try {
+        messages.create({...req.body})
+        res.json("New message posted!")
+    }
+    catch (err) {
+        res.status(500).json({
+            error: err.message,
+            message: "Close, but no cigar."
+        })
+
     }
 })
 

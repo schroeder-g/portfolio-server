@@ -11,5 +11,16 @@ module.exports = {
 
     async findByID(id){
         return messages.find(m => m.id === id)
+    },
+
+    async create({name, email, message}){
+        const newMessage = {
+            id: shortid(), 
+            subject: "New Portfolio Inquiry", 
+            name: name, 
+            email: email, 
+            message: message
+        }
+        messages.push(newMessage)
     }
 }
