@@ -7,5 +7,9 @@ let messages = [
 module.exports = {
     async findAll(){
         return messages
+    },
+
+    async findByID(id){
+        return messages.find(m => m.id === id)
     }
 }
