@@ -1,8 +1,23 @@
+//Imports @ the top 
 const express = require("express");
-const server = express();
+const messages = require("./messageModel")
 
-server.get('/hello', (req, res) => {
-   res.json({ message: "hello!"})
-});
+//Make an instance of Express
+const server = express()
+
+//Employ Global Middleware
+server.use(express.json())
+
+//Get All Messages
+server.get('/messages/all', (req, res) => {
+    console.log("something happened")
+    messages.findAll()
+        .then((msgs) => {
+            res.json({ message: msgs })
+        })
+        .catch((err) => {
+            res.json({ message: err})
+        })
+})
 
 module.exports = server
