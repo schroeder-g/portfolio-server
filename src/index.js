@@ -1,9 +1,4 @@
-const express = require("express");
-const server = express();
-
-server.get('/hello', (req, res) => {
-   res.json({ message: "hello!"})
-});
+const server = require('./paths')
 
 server.listen(5000, () => {
     console.log("server running on 5000");
