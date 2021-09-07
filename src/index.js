@@ -1,3 +1,10 @@
-require("express")
+const express = require("express");
+const server = express();
 
-console.log("do it")
+server.get('/hello', (req, res) => {
+   res.json({ message: "hello!"})
+});
+
+server.listen(5000, () => {
+    console.log("server running on 5000");
+})
