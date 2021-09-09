@@ -1,5 +1,6 @@
 //Imports @ the top 
-const express = require("express");
+const express = require("express")
+const cors = require("cors")
 const messages = require("./messageModel")
 
 //Make an instance of Express
@@ -7,9 +8,10 @@ const server = express()
 
 //Employ Global Middleware
 server.use(express.json())
+server.use(cors())
 
 /* Get All Messages */
-server.get('/messages/all', (req, res) => {
+server.get('/messages/all', (req, res, next) => {
     messages.findAll()
         .then((msgs) => {
             res.json({ message: msgs })
@@ -35,7 +37,7 @@ server.get('/messages/:id', async (req, res) => {
     }
 })
 /* Post New Message */
-server.post('/messages', async (req, res) => {
+server.post('/messages', async (req, res, next) => {
     try {
         messages.create({...req.body})
         res.json("New message posted!")
@@ -43,7 +45,7 @@ server.post('/messages', async (req, res) => {
     catch (err) {
         res.status(500).json({
             error: err.message,
-            message: "Close, but no cigar."
+            message: "No post for you."
         })
 
     }
