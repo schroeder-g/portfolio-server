@@ -1,15 +1,14 @@
 const shortid = require("shortid");
-let nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 
 let messages = [
     {id: shortid(), subject: "I love your style.", name: "Goober McCormick", email:"schroedergoncalves@gmail.com", message:"You are a paragon of fashion"}
 ]
-
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user:"schroedergoncalves@gmail.com",
-        pass: "smuczbjbmmpsfaou"
+        pass: process.env.EMAIL_PASSWORD
 
     }
 })
@@ -19,12 +18,12 @@ let newMessage = {
 }
 
 const receivingMessageOptions = {
-    from: 'schroedergoncalves@email.com', 
-    to: 'checkmatejunky@email.com', // list of receivers
+    from: 'You', 
+    to: 'schroedergoncalves@gmail.com', // list of receivers
 }
 
 const sendingMessageOptions = {
-    from: 'schroedergoncalves@email.com', 
+    from: 'Alex Gon\u00E7alves', 
 }
 
 
@@ -70,7 +69,7 @@ module.exports = {
                 </p>
                 <p>
                     I'll get back to you as soon as I can, 3-5 business days 
-                    serving as a clichd but appropriate estimate here.
+                    serving as a clich\u00E9d but appropriate estimate here.
                 </p
                 <p>Looking forward to chatting,</p>
                 <p>Alex</p>
